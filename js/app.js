@@ -19,7 +19,7 @@ const showData = (word) => {
   const postDiv = document.createElement("div");
   postDiv.classList.add("p-10", "border", "border-sky-500", "rounded-lg");
   postDiv.innerHTML = `
-    <div class="flex items-center justify-between">
+    <div class="lg:flex items-center justify-between">
         <div>
             <h2 class="text-6xl font-bold font-serif">${word.word}</h2>
             <p class="text-2xl text-blue-600/100 font-medium">${
@@ -27,7 +27,7 @@ const showData = (word) => {
             }</p>
         </div>
         <div>
-            <audio src="${word.phonetics[0].audio || word.phonetics[1].audio || word.phonetics[2].audio}" type="audio/mp3" controls></audio>
+            <audio class="w-[200px] my-2" src="${word.phonetics[0].audio || word.phonetics[1].audio || word.phonetics[2].audio}" type="audio/mp3" controls></audio>
         </div>
     </div>
     <p class="my-5 font-bold text-2xl font-medium">${
