@@ -6,8 +6,8 @@ const loadData = async (inputData) => {
     // console.log(data);
     showData(data[0]);
   } catch (err) {
-    // alert("can not find word");
-    // window.location.reload();
+    alert("can not find word");
+    window.location.reload();
     // console.log(err)
   }
 };
