@@ -61,11 +61,11 @@ const showData = (word) => {
         <li class="list-disc font-medium">${
           word.meanings[1].definitions[0].definition
         }</li>
-        <li class="list-none font-medium text-blue-600/75">${
+        <li class="list-none font-medium text-blue-600/75">"${
           word.meanings[1].definitions[0].example
             ? word.meanings[1].definitions[0].example
-            : '"make a example by your own"'
-        }</li>
+            : 'make a example by your own'
+        }"</li>
     <p class="my-5 font-medium">Source : <span class="text-blue-600/75 underline underline-offset-1">${
       word.sourceUrls[0]
     }</span></p>
@@ -73,8 +73,7 @@ const showData = (word) => {
   wordContainer.appendChild(postDiv);
   loader(false);
 };
-
-document.getElementById("search-btn").addEventListener("click", function () {
+function processSearch() {
   loader(true);
   const inputText = document.getElementById("input").value;
   if (inputText === "") {
@@ -82,21 +81,16 @@ document.getElementById("search-btn").addEventListener("click", function () {
   } else {
     loadData(inputText);
   }
+}
+document.getElementById("search-btn").addEventListener("click", function () {
+  processSearch();
 });
 
-document
-  .getElementById("input")
-  .addEventListener("keypress", function (e) {
-    if (e.key === "Enter") {
-      loader(true);
-      const inputText = document.getElementById("input").value;
-      if (inputText === "") {
-        alert("please type your word");
-      } else {
-        loadData(inputText);
-      }
-    }
-  });
+document.getElementById("input").addEventListener("keypress", function (e) {
+  if (e.key === "Enter") {
+    processSearch();
+  }
+});
 const loader = (isLoading) => {
   const loaderSection = document.getElementById("loader");
   if (isLoading) {
