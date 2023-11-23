@@ -13,7 +13,7 @@ const loadData = async (inputData) => {
 };
 
 const showData = (word) => {
-    console.log(word)
+    // console.log(word)
   const wordContainer = document.getElementById("word-container");
   wordContainer.innerHTML = "";
   const postDiv = document.createElement("div");
@@ -63,9 +63,11 @@ const showData = (word) => {
     }</span></p>
   `;
   wordContainer.appendChild(postDiv);
+  loader(false);
 };
 
 document.getElementById("search-btn").addEventListener("click", function () {
+  loader(true);
   const inputText = document.getElementById("input").value;
   if (inputText === "") {
     alert("please type your word");
@@ -73,3 +75,12 @@ document.getElementById("search-btn").addEventListener("click", function () {
     loadData(inputText);
   }
 });
+
+const loader = isLoading => {
+  const loaderSection = document.getElementById("loader");
+  if(isLoading){
+    loaderSection.classList.remove("hidden");
+  }else{
+    loaderSection.classList.add("hidden");
+  }
+}
