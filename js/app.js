@@ -13,7 +13,7 @@ const loadData = async (inputData) => {
 };
 
 const showData = (word) => {
-    // console.log(word)
+  // console.log(word)
   const wordContainer = document.getElementById("word-container");
   wordContainer.innerHTML = "";
   const postDiv = document.createElement("div");
@@ -23,11 +23,15 @@ const showData = (word) => {
         <div>
             <h2 class="text-6xl font-bold font-serif">${word.word}</h2>
             <p class="text-2xl text-blue-600/100 font-medium">${
-            word.phonetic ? word.phonetic : word.phonetics[1].text
+              word.phonetic ? word.phonetic : word.phonetics[1].text
             }</p>
         </div>
         <div>
-            <audio class="w-[200px] my-2" src="${word.phonetics[0].audio || word.phonetics[1].audio || word.phonetics[2].audio}" type="audio/mp3" controls></audio>
+            <audio class="w-[200px] my-2" src="${
+              word.phonetics[0].audio ||
+              word.phonetics[1].audio ||
+              word.phonetics[2].audio
+            }" type="audio/mp3" controls></audio>
         </div>
     </div>
     <p class="my-5 font-bold text-2xl font-medium">${
@@ -38,10 +42,14 @@ const showData = (word) => {
           word.meanings[0].definitions[0].definition
         }</li>
         <li class="list-disc font-medium">${
-          word.meanings[0].definitions[1].definition ? word.meanings[0].definitions[1].definition : "this is most commonly used word"
+          word.meanings[0].definitions[1].definition
+            ? word.meanings[0].definitions[1].definition
+            : "this is most commonly used word"
         }</li>
         <li class="list-disc font-medium">${
-          word.meanings[0].definitions[2].definition ? word.meanings[0].definitions[2].definition : "old english word"
+          word.meanings[0].definitions[2].definition
+            ? word.meanings[0].definitions[2].definition
+            : "old english word"
         }</li>
     <h4 class="my-5 font-medium">Synonyms : <span class="text-blue-600/100">${
       word.meanings[0].synonyms[0] ? word.meanings[0].synonyms[0] : word.word
@@ -76,11 +84,24 @@ document.getElementById("search-btn").addEventListener("click", function () {
   }
 });
 
-const loader = isLoading => {
+document
+  .getElementById("input")
+  .addEventListener("keypress", function (e) {
+    if (e.key === "Enter") {
+      loader(true);
+      const inputText = document.getElementById("input").value;
+      if (inputText === "") {
+        alert("please type your word");
+      } else {
+        loadData(inputText);
+      }
+    }
+  });
+const loader = (isLoading) => {
   const loaderSection = document.getElementById("loader");
-  if(isLoading){
+  if (isLoading) {
     loaderSection.classList.remove("hidden");
-  }else{
+  } else {
     loaderSection.classList.add("hidden");
   }
-}
+};
